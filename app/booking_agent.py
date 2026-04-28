@@ -1,5 +1,8 @@
 from flask import Blueprint, render_template, request, session, flash
-from general import get_db_connection
+try:
+    from .general import get_db_connection
+except ImportError:
+    from general import get_db_connection
 
 
 # Create Blueprint

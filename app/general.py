@@ -1,3 +1,5 @@
+import os
+
 from flask import Blueprint, render_template, request, session, redirect
 import pymysql  # Import as needed
 
@@ -65,10 +67,11 @@ def sqlsyntax(x):
 
 # Establishes database connection
 def get_db_connection():
-    return pymysql.connect(host='localhost',
-                           user='root',
-                           password='',
-                           db='final_project_3',
+    return pymysql.connect(host=os.environ.get('DB_HOST', os.environ.get('MYSQLHOST', 'localhost')),
+                           port=int(os.environ.get('DB_PORT', os.environ.get('MYSQLPORT', 3306))),
+                           user=os.environ.get('DB_USER', os.environ.get('MYSQLUSER', 'root')),
+                           password=os.environ.get('DB_PASSWORD', os.environ.get('MYSQLPASSWORD', '')),
+                           db=os.environ.get('DB_NAME', os.environ.get('MYSQLDATABASE', 'final_project_3')),
                            charset='utf8mb4',
                            cursorclass=pymysql.cursors.DictCursor)
 

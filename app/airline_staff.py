@@ -1,6 +1,9 @@
 from flask import Blueprint, render_template, request, session, flash, redirect, url_for
 from datetime import datetime
-from general import get_db_connection, sqlsyntax
+try:
+    from .general import get_db_connection, sqlsyntax
+except ImportError:
+    from general import get_db_connection, sqlsyntax
 
 
 # Create Blueprint
